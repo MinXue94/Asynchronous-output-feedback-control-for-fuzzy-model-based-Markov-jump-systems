@@ -1,7 +1,7 @@
 clc
 clear
-%ºÄÉ¢output feedback¿ØÖÆ %non fragile controller
-%%%Ä£Ì¬×ªÒÆÕóµÄÈ·¶¨¼°ÆäÍ¼ĞÎ
+%è€—æ•£output feedbackæ§åˆ¶ %non fragile controller
+%%%æ¨¡æ€è½¬ç§»é˜µçš„ç¡®å®šåŠå…¶å›¾å½¢
 finaltime=80;
 p=[];
 %Pi=[0.3 0.2 0.5;0.4 0.2 0.4;0.55 0.15 0.3];
@@ -15,13 +15,13 @@ q11=0.3; q12=0.2; q13=0.5;
 q21=0.1; q22=0.2; q23=0.7;
 q31=0.3; q32=0.2; q33=0.5;
 
-flag  =1;                           %³õÊ¼Ê±¿Ì£¨0Ê±¿Ì£©µÄÄ£Ì¬  
-for i = 1:finaltime                 %1µ½500Ê±¿ÌµÄÄ£Ì¬ÇóÈ¡              
+flag  =1;                           %åˆå§‹æ—¶åˆ»ï¼ˆ0æ—¶åˆ»ï¼‰çš„æ¨¡æ€  
+for i = 1:finaltime                 %1åˆ°500æ—¶åˆ»çš„æ¨¡æ€æ±‚å–              
        if (flag == 1)
              a=rand;
              b=rand;
                 if a<p11 
-                    flag=1;           %system 1Ä£Ì¬µ½1Ä£Ì¬
+                    flag=1;           %system 1æ¨¡æ€åˆ°1æ¨¡æ€
                     if b<q11
                         flag1=1;
                     elseif q11<=b && b<=(q11+q12)
@@ -31,7 +31,7 @@ for i = 1:finaltime                 %1µ½500Ê±¿ÌµÄÄ£Ì¬ÇóÈ¡
                     end
                                                 
                  elseif  p11<=a && a<=(p11+p12)
-                    flag=2;           %system 1Ä£Ì¬µ½2Ä£Ì¬
+                    flag=2;           %system 1æ¨¡æ€åˆ°2æ¨¡æ€
                     if b<q21
                         flag1=1;
                     elseif q21<=b && b<=(q21+q22)
@@ -41,7 +41,7 @@ for i = 1:finaltime                 %1µ½500Ê±¿ÌµÄÄ£Ì¬ÇóÈ¡
                     end
                     
                 else
-                    flag=3;           %system 1Ä£Ì¬µ½3Ä£Ì¬ 
+                    flag=3;           %system 1æ¨¡æ€åˆ°3æ¨¡æ€ 
                     if b<q31
                         flag1=1;
                     elseif q31<=b && b<=(q31+q32)
@@ -55,7 +55,7 @@ for i = 1:finaltime                 %1µ½500Ê±¿ÌµÄÄ£Ì¬ÇóÈ¡
              a=rand;
              b=rand;
                 if a<p21
-                    flag=1;           %system 2Ä£Ì¬µ½1Ä£Ì¬
+                    flag=1;           %system 2æ¨¡æ€åˆ°1æ¨¡æ€
                     if b<q11
                         flag1=1;
                     elseif q11<=b && b<=(q11+q12)
@@ -64,7 +64,7 @@ for i = 1:finaltime                 %1µ½500Ê±¿ÌµÄÄ£Ì¬ÇóÈ¡
                         flag1=3;
                     end
                 elseif (p21<=a && a<=(p21+p22))
-                    flag=2;           %system 2Ä£Ì¬µ½2Ä£Ì¬
+                    flag=2;           %system 2æ¨¡æ€åˆ°2æ¨¡æ€
                     if b<q21
                         flag1=1;
                     elseif q21<=b && b<=(q21+q22)
@@ -74,7 +74,7 @@ for i = 1:finaltime                 %1µ½500Ê±¿ÌµÄÄ£Ì¬ÇóÈ¡
                     end
 
                 else
-                    flag=3;           %system2Ä£Ì¬µ½3Ä£Ì¬
+                    flag=3;           %system2æ¨¡æ€åˆ°3æ¨¡æ€
                     if b<q31
                         flag1=1;
                     elseif q31<=b && b<=(q31+q32)
@@ -87,7 +87,7 @@ for i = 1:finaltime                 %1µ½500Ê±¿ÌµÄÄ£Ì¬ÇóÈ¡
              a=rand;
              b=rand;
                 if a<p31
-                    flag=1;           %3Ä£Ì¬µ½1Ä£Ì¬
+                    flag=1;           %3æ¨¡æ€åˆ°1æ¨¡æ€
                     if b<q11
                         flag1=1;
                     elseif q11<=b && b<=(q11+q12)
@@ -96,7 +96,7 @@ for i = 1:finaltime                 %1µ½500Ê±¿ÌµÄÄ£Ì¬ÇóÈ¡
                         flag1=3;
                     end
                 elseif (p31<=a && a<=(p31+p32))
-                    flag=2;           %3Ä£Ì¬µ½2Ä£Ì¬
+                    flag=2;           %3æ¨¡æ€åˆ°2æ¨¡æ€
                     if b<q21
                         flag1=1;
                     elseif q21<=b && b<=(q21+q22)
@@ -105,7 +105,7 @@ for i = 1:finaltime                 %1µ½500Ê±¿ÌµÄÄ£Ì¬ÇóÈ¡
                         flag1=3;
                     end
                 else
-                    flag=3;           %3Ä£Ì¬µ½3Ä£Ì¬
+                    flag=3;           %3æ¨¡æ€åˆ°3æ¨¡æ€
                     if b<q31
                         flag1=1;
                     elseif q31<=b && b<=(q31+q32)
@@ -116,37 +116,37 @@ for i = 1:finaltime                 %1µ½500Ê±¿ÌµÄÄ£Ì¬ÇóÈ¡
                 end
              
        end
-p(i)=flag;                              %1µ½500Ê±¿ÌµÄÄ£Ì¬¡£Ò»µ©³õÊ¼Ä£Ì¬È·¶¨£¬ºóĞøµÄÄ£Ì¬¿ÉÒÔÀëÏßÈ·¶¨
+p(i)=flag;                              %1åˆ°500æ—¶åˆ»çš„æ¨¡æ€ã€‚ä¸€æ—¦åˆå§‹æ¨¡æ€ç¡®å®šï¼Œåç»­çš„æ¨¡æ€å¯ä»¥ç¦»çº¿ç¡®å®š
 q(i)=flag1;
 end
-p=[1 p];                                 %0µ½500Ê±¿ÌµÄÄ£Ì¬¡£±¾ÖÊÉÏ£¬µÚ500Ê±¿ÌµÄÄ£Ì¬ÓÃ²»×Å
+p=[1 p];                                 %0åˆ°500æ—¶åˆ»çš„æ¨¡æ€ã€‚æœ¬è´¨ä¸Šï¼Œç¬¬500æ—¶åˆ»çš„æ¨¡æ€ç”¨ä¸ç€
 q=[1 q];
 n1=0:finaltime;
 figure
-stairs(n1,p,'LineWidth',2,'Color','b');      %stairsº¯Êı»æÖÆ½×Ìİ×´Í¼
-%stem(n1,p,'fill','LineWidth',2,'Color','b')  %stemº¯Êı»æÖÆ»ğ²ñ¹£Í¼
-%stem(n1,q,'fill','LineWidth',1.5,'Color','k')%%ºÚÉ«
+stairs(n1,p,'LineWidth',2,'Color','b');      %stairså‡½æ•°ç»˜åˆ¶é˜¶æ¢¯çŠ¶å›¾
+%stem(n1,p,'fill','LineWidth',2,'Color','b')  %stemå‡½æ•°ç»˜åˆ¶ç«æŸ´æ¢—å›¾
+%stem(n1,q,'fill','LineWidth',1.5,'Color','k')%%é»‘è‰²
 axis([0 finaltime,0.5 3.5])
 latexStr1 = ['$k$ '];
 xlabel(latexStr1,'interpreter','latex','FontSize',14) 
-latexStr2 = ['$\delta_k$ '];                 % LaTeXÓï·¨£¬ÒòÎªÓĞĞ©¶«Î÷²»ÓÃlatexĞ´²»³öÀ´
+latexStr2 = ['$\delta_k$ '];                 % LaTeXè¯­æ³•ï¼Œå› ä¸ºæœ‰äº›ä¸œè¥¿ä¸ç”¨latexå†™ä¸å‡ºæ¥
 ylabel(latexStr2,'interpreter','latex','FontSize',14)
 
 figure
-stairs(n1,q,'LineWidth',2,'Color','b');      %stairsº¯Êı»æÖÆ½×Ìİ×´Í¼
-%stem(n1,p,'fill','LineWidth',2,'Color','b')  %stemº¯Êı»æÖÆ»ğ²ñ¹£Í¼
-%stem(n1,q,'fill','LineWidth',1.5,'Color','k')%%ºÚÉ«
+stairs(n1,q,'LineWidth',2,'Color','b');      %stairså‡½æ•°ç»˜åˆ¶é˜¶æ¢¯çŠ¶å›¾
+%stem(n1,p,'fill','LineWidth',2,'Color','b')  %stemå‡½æ•°ç»˜åˆ¶ç«æŸ´æ¢—å›¾
+%stem(n1,q,'fill','LineWidth',1.5,'Color','k')%%é»‘è‰²
 axis([0 finaltime,0.5 3.5])
 latexStr1 = ['$k$ '];
 xlabel(latexStr1,'interpreter','latex','FontSize',14) 
-latexStr2 = ['$\eta_k$ '];                 % LaTeXÓï·¨£¬ÒòÎªÓĞĞ©¶«Î÷²»ÓÃlatexĞ´²»³öÀ´
+latexStr2 = ['$\eta_k$ '];                 % LaTeXè¯­æ³•ï¼Œå› ä¸ºæœ‰äº›ä¸œè¥¿ä¸ç”¨latexå†™ä¸å‡ºæ¥
 ylabel(latexStr2,'interpreter','latex','FontSize',14)
 
 %% system
-%µ¥Á¬¸Ë»úĞµ±ÛÏµÍ³
+%å•è¿æ†æœºæ¢°è‡‚ç³»ç»Ÿ
 M{1}=1; J{1}=1;    M{2}=5;J{2}=5;    M{3}=10;J{3}=10;    
-L=0.5;g=9.81;beta1=0.01/pi;T=0.1;     %wÈ¡0.65Ê±£¬tminÎª10^-4¼¶£¬²»Âú×ã£»w=1Ê±£¬tminÎª-10^-5¼¶£¬Âú×ã
-RR=2;        %Çø±ğQSRÖĞµÄR
+L=0.5;g=9.81;beta1=0.01/pi;T=0.1;     %wå–0.65æ—¶ï¼Œtminä¸º10^-4çº§ï¼Œä¸æ»¡è¶³ï¼›w=1æ—¶ï¼Œtminä¸º-10^-5çº§ï¼Œæ»¡è¶³
+RR=2;        %åŒºåˆ«QSRä¸­çš„R
 
 A{1,1}=[1 T;-T*g*L 1-T*RR/(J{1})];  A{2,1}=[1 T;-T*g*L 1-T*RR/(J{2})];  A{3,1}=[1 T;-T*g*L 1-T*RR/(J{3})];  
 A{1,2}=[1 T;-beta1*T*g*L 1-T*RR/(J{1})];  A{2,2}=[1 T;-beta1*T*g*L 1-T*RR/(J{2})]; A{3,2}=[1 T;-beta1*T*g*L 1-T*RR/(J{3})]; 
@@ -171,7 +171,7 @@ F{1,2}=[1]; F{2,2}=[1]; F{3,2}=[1];
 % F{1,1}=[0]; F{1,2}=[0]; F{1,3}=[0];  
 % F{2,1}=[0]; F{2,2}=[0]; F{2,3}=[0]; 
 
-%% ¿ØÖÆÆ÷ÔöÒæ
+%% æ§åˆ¶å™¨å¢ç›Š
 K{1,1}=-0.8644;  K{2,1}=-0.7739;  K{3,1}=-0.7278;  % dissipativity
 K{1,2}=-1.7148;  K{2,2}=-1.6087;  K{3,2}=-1.5537;
 
@@ -184,26 +184,26 @@ kesi1{1,2}=-0.02; kesi1{2,2}=-0.02; kesi1{3,2}=-0.02;
 kesi3{1,1}=[0.02];  kesi3{2,1}=[0.02];  kesi3{3,1}=[0.02];
 kesi3{1,2}=[-0.01]; kesi3{2,2}=[-0.01]; kesi3{3,2}=[-0.01];
 
-%% ³õÖµ
-x0=[0.5*pi;-0.1*pi];   %0Ê±¿ÌµÄ³õÖµ
-x(:,1)=x0;   %¾ØÕóxÖĞµÚÒ»ÁĞÔªËØÊÇx0
+%% åˆå€¼
+x0=[0.5*pi;-0.1*pi];   %0æ—¶åˆ»çš„åˆå€¼
+x(:,1)=x0;   %çŸ©é˜µxä¸­ç¬¬ä¸€åˆ—å…ƒç´ æ˜¯x0
 x1(:,1)=x0;
-y_hat0=[0.5*pi];    %0Ê±¿Ì¹À¼ÆµÄÊä³ö
+y_hat0=[0.5*pi];    %0æ—¶åˆ»ä¼°è®¡çš„è¾“å‡º
 y_hat(:,1)=y_hat0;
 %%
 ws=[];
 for count=1:finaltime+1
-    s=p(count);   %Ä£Ì¬
-    v=q(count);   %¿ØÖÆÆ÷Ä£Ì¬  
+    s=p(count);   %æ¨¡æ€
+    v=q(count);   %æ§åˆ¶å™¨æ¨¡æ€  
     
     alpha1=[1 0]; prob = [0.8 0.2];   %prob 
     Alpha=randsrc(finaltime+1,1,[alpha1; prob]);   
-    %randsrc(m,n,[alphabet;prob])²ÎÊım&nµÃµ½mxnµÄ¾ØÕó,alphabetÊÇ¾ØÕóÖĞÔªËØ¿ÉÄÜÈ¡ÖµµÄ¼¯ºÏ,probÊÇÓëalphabetÍ¬Î¬¶ÈµÄ¸ÅÂÊÏòÁ¿£¬·Ö±ğ¶ÔÓ¦×ÅalphabetÖĞµÄÃ¿¸öÔªËØ¿ÉÄÜ³öÏÖµÄ¸ÅÂÊ£¬ÆäÔªËØÖ®ºÍÎª1¡£
-    beta=Alpha(count);  %beta(k)±íÊ¾¶ª°üµÄ±äÁ¿
+    %randsrc(m,n,[alphabet;prob])å‚æ•°m&nå¾—åˆ°mxnçš„çŸ©é˜µ,alphabetæ˜¯çŸ©é˜µä¸­å…ƒç´ å¯èƒ½å–å€¼çš„é›†åˆ,probæ˜¯ä¸alphabetåŒç»´åº¦çš„æ¦‚ç‡å‘é‡ï¼Œåˆ†åˆ«å¯¹åº”ç€alphabetä¸­çš„æ¯ä¸ªå…ƒç´ å¯èƒ½å‡ºç°çš„æ¦‚ç‡ï¼Œå…¶å…ƒç´ ä¹‹å’Œä¸º1ã€‚
+    beta=Alpha(count);  %beta(k)è¡¨ç¤ºä¸¢åŒ…çš„å˜é‡
     
     alpha=0.9;  %smoothing parameter
     
-    x_1=[1 0]*x(:,count);     %x(:,count)±íÊ¾µÚcountÁĞ
+    x_1=[1 0]*x(:,count);     %x(:,count)è¡¨ç¤ºç¬¬countåˆ—
     x_11=[1 0]*x1(:,count);  
             if x_1==0
                 h_1=1;
@@ -228,7 +228,7 @@ for count=1:finaltime+1
    EE=h_1*E{s,1}+h_2*E{s,2};
    FF=h_1*F{s,1}+h_2*F{s,2}; 
    
-   %¿ª»·ÏµÍ³
+   %å¼€ç¯ç³»ç»Ÿ
    AA1=h_11*A{s,1}+h_22*A{s,2}; 
    DD1=h_11*D{s,1}+h_22*D{s,2};
    CC1=h_11*C{s,1}+h_22*C{s,2};
@@ -242,7 +242,7 @@ for count=1:finaltime+1
    Kh_{1}=h_1*(K{1,1}+kesi1{1,1}*kesi2_{1,1}*kesi3{1,1})+h_2*(K{1,2}+kesi1{1,2}*kesi2_{1,2}*kesi3{1,2});
    Kh_{2}=h_1*(K{2,1}+kesi1{2,1}*kesi2_{2,1}*kesi3{2,1})+h_2*(K{2,2}+kesi1{2,2}*kesi2_{2,2}*kesi3{2,2});
    Kh_{3}=h_1*(K{3,1}+kesi1{3,1}*kesi2_{3,1}*kesi3{3,1})+h_2*(K{3,2}+kesi1{3,2}*kesi2_{3,2}*kesi3{3,2});
-  %Ã»ÓĞ¿ØÖÆÆ÷
+  %æ²¡æœ‰æ§åˆ¶å™¨
     if count>=1 & count<=25
         w=0.5*exp(0.1*count)*sin(count);
         x1(:,count+1)=AA1*x1(:,count)+DD1*w;
@@ -256,22 +256,22 @@ for count=1:finaltime+1
         z1(:,count)=EE1*x1(:,count)+FF1*w;
     end  
  
-%ÒıÈë·´À¡¿ØÖÆÆ÷
+%å¼•å…¥åé¦ˆæ§åˆ¶å™¨
     if count>=1 & count<=25
        w=0.5*exp(0.1*count)*sin(count);
        
-     y_hat(:,count+1)=alpha*CC*x(:,count)+(1-alpha)*y_hat(:,count); %Ê±ĞòÔ¤²âÊä³öy_hat
+     y_hat(:,count+1)=alpha*CC*x(:,count)+(1-alpha)*y_hat(:,count); %æ—¶åºé¢„æµ‹è¾“å‡ºy_hat
      y(:,count)=CC*x(:,count);
-     y_c(:,count)=beta*y(:,count)+(1-beta)*y_hat(:,count); %controller½ÓÊÕµ½µÄĞÅºÅ
+     y_c(:,count)=beta*y(:,count)+(1-beta)*y_hat(:,count); %controlleræ¥æ”¶åˆ°çš„ä¿¡å·
      u(:,count)=Kh_{v}*y_c(:,count);
      x(:,count+1)=AA*x(:,count)+BB*u(:,count)+DD*w;
      z(:,count)=EE*x(:,count)+FF*w;
     else
        w=0;
        
-     y_hat(:,count+1)=alpha*CC*x(:,count)+(1-alpha)*y_hat(:,count); %Ê±ĞòÔ¤²âÊä³öy_hat
+     y_hat(:,count+1)=alpha*CC*x(:,count)+(1-alpha)*y_hat(:,count); %æ—¶åºé¢„æµ‹è¾“å‡ºy_hat
      y(:,count)=EE*x(:,count);
-     y_c(:,count)=beta*y(:,count)+(1-beta)*y_hat(:,count); %controller½ÓÊÕµ½µÄĞÅºÅ
+     y_c(:,count)=beta*y(:,count)+(1-beta)*y_hat(:,count); %controlleræ¥æ”¶åˆ°çš„ä¿¡å·
      u(:,count)=Kh_{v}*y_c(:,count);
      x(:,count+1)=AA*x(:,count)+BB*u(:,count)+DD*w;
      z(:,count)=EE*x(:,count)+FF*w;
@@ -279,7 +279,7 @@ for count=1:finaltime+1
    end
         
 end
-figure    %¿ª»·ÏµÍ³µÄ×´Ì¬ÏìÓ¦ÇúÏß 
+figure    %å¼€ç¯ç³»ç»Ÿçš„çŠ¶æ€å“åº”æ›²çº¿ 
 %stairs(n2,q,'LineWidth',2,'Color','k');
 plot([0:1:finaltime+1],x1,'LineWidth',2);
 axis([0 finaltime,-4 4])
@@ -287,12 +287,12 @@ latexStr1 = ['$k$ '];
 xlabel(latexStr1,'interpreter','latex','FontSize',14) 
 latexStr2 = ['$State~trajectories$ '];
 ylabel(latexStr2,'interpreter','latex','FontSize',14) 
-latexStr1 = ['$x_{1}(k)$'];                 % LaTeXÓï·¨£¬ÒòÎªÓĞĞ©¶«Î÷²»ÓÃlatexĞ´²»³öÀ´
+latexStr1 = ['$x_{1}(k)$'];                 % LaTeXè¯­æ³•ï¼Œå› ä¸ºæœ‰äº›ä¸œè¥¿ä¸ç”¨latexå†™ä¸å‡ºæ¥
 latexStr2 = ['$x_{2}(k)$'];
-lgh=legend(latexStr1,latexStr2);  %¼Ó×¢ÊÍ
+lgh=legend(latexStr1,latexStr2);  %åŠ æ³¨é‡Š
 set(lgh,'interpreter','latex','FontSize',16)    
 
-figure           %±Õ»·ÏµÍ³µÄ×´Ì¬ÏìÓ¦ÇúÏß                            
+figure           %é—­ç¯ç³»ç»Ÿçš„çŠ¶æ€å“åº”æ›²çº¿                            
 plot([0:1:finaltime+1],x,'LineWidth',2);
 axis([0 finaltime,-2 2])
 latexStr1 = ['$k$ '];
@@ -300,34 +300,18 @@ xlabel(latexStr1,'interpreter','latex','FontSize',14)
 latexStr2 = ['$State~trajectories$ '];
 ylabel(latexStr2,'interpreter','latex','FontSize',14)
 %ylabel('State trajectories')
-latexStr1 = ['$x_{1}(k)$'];                 % LaTeXÓï·¨£¬ÒòÎªÓĞĞ©¶«Î÷²»ÓÃlatexĞ´²»³öÀ´
+latexStr1 = ['$x_{1}(k)$'];                 % LaTeXè¯­æ³•ï¼Œå› ä¸ºæœ‰äº›ä¸œè¥¿ä¸ç”¨latexå†™ä¸å‡ºæ¥
 latexStr2 = ['$x_{2}(k)$'];
-lgh=legend(latexStr1,latexStr2);  %¼Ó×¢ÊÍ
-set(lgh,'interpreter','latex','FontSize',16)              %¾ÍÊÇ°Ñ×ÖÌå¸Ä³Élatex¸ñÊ½figure
+lgh=legend(latexStr1,latexStr2);  %åŠ æ³¨é‡Š
+set(lgh,'interpreter','latex','FontSize',16)              %å°±æ˜¯æŠŠå­—ä½“æ”¹æˆlatexæ ¼å¼figure
 
 figure                                       
 plot([0:1:finaltime],u,'LineWidth',2);
 axis([0 finaltime,-4 2])
 latexStr1 = ['$k$ '];
 xlabel(latexStr1,'interpreter','latex','FontSize',14) 
-latexStr2 = ['$u(k)$ '];                 % LaTeXÓï·¨£¬ÒòÎªÓĞĞ©¶«Î÷²»ÓÃlatexĞ´²»³öÀ´
+latexStr2 = ['$u(k)$ '];                 % LaTeXè¯­æ³•ï¼Œå› ä¸ºæœ‰äº›ä¸œè¥¿ä¸ç”¨latexå†™ä¸å‡ºæ¥
 ylabel(latexStr2,'interpreter','latex','FontSize',14)
-
-% figure           %yuceÇúÏß
-% plot([0:1:finaltime],y,'LineWidth',2);
-% % axis([0 finaltime,-1 1])
-% latexStr1 = ['$k$ '];
-% xlabel(latexStr1,'interpreter','latex','FontSize',14) 
-% latexStr2 = ['$y(k)$ '];
-% ylabel(latexStr2,'interpreter','latex','FontSize',14)
-% % hold on           %prediction
-% figure
-% plot([0:1:finaltime+1],y_hat,'LineWidth',2);
-% % axis([0 finaltime-1,-1 1])
-% latexStr1 = ['$k$ '];                 % LaTeXÓï·¨£¬ÒòÎªÓĞĞ©¶«Î÷²»ÓÃlatexĞ´²»³öÀ´
-% xlabel(latexStr1,'interpreter','latex','FontSize',14) 
-% latexStr2 = ['$\hat{y}(k)$'];
-% ylabel(latexStr2,'interpreter','latex','FontSize',14)
 
 
 figure
@@ -338,9 +322,9 @@ latexStr1 = ['$k$ '];
 xlabel(latexStr1,'interpreter','latex','FontSize',14) 
 latexStr2 = ['$outputs$ '];
 ylabel(latexStr2,'interpreter','latex','FontSize',14) 
-latexStr1 = ['$y(k)$'];                 % LaTeXÓï·¨£¬ÒòÎªÓĞĞ©¶«Î÷²»ÓÃlatexĞ´²»³öÀ´
+latexStr1 = ['$y(k)$'];                 % LaTeXè¯­æ³•ï¼Œå› ä¸ºæœ‰äº›ä¸œè¥¿ä¸ç”¨latexå†™ä¸å‡ºæ¥
 latexStr2 = ['$\hat{y}(k)$'];
-lgh=legend(latexStr1,latexStr2);  %¼Ó×¢ÊÍ
+lgh=legend(latexStr1,latexStr2);  %åŠ æ³¨é‡Š
 set(lgh,'interpreter','latex','FontSize',16)    
 
 
