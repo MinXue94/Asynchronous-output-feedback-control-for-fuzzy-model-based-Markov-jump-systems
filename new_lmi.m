@@ -44,7 +44,7 @@ Pi=[0.3 0.2 0.5;0.4 0.2 0.4;0.55 0.15 0.3];
 Phi=[0.5 0.2 0.3;0.1 0.3 0.6;0.4 0.1 0.5];
 
 %% dissipative parameters
- Q=-1;    S=1;    R=1;  
+ Q=-1;    S=1;    R=2;  
 
 Q1_=-chol(-Q,'lower');    % -Q=Q_'Q_
 %% data dropouts
@@ -53,7 +53,7 @@ beta_=sqrt(beta*(1-beta));
 %% 标量
 aib1=0.1;
 aib2=0.1;    %辅助求解LMIs
-alpha=0.8;  %平滑系数
+alpha=0.5;  %平滑系数
 %% define variables
 setlmis([]); 
 for i=1:rule
