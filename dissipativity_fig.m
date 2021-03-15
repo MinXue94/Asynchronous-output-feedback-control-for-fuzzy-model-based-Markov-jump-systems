@@ -1,6 +1,6 @@
 clc
 clear
-%耗散output feedback控制 %non fragile controller
+%dissipative  nonfragile output feedback controller
 %%%模态转移阵的确定及其图形
 finaltime=80;
 p=[];
@@ -122,7 +122,7 @@ end
 p=[1 p];                                 %0到500时刻的模态。本质上，第500时刻的模态用不着
 q=[1 q];
 n1=0:finaltime;
-figure
+figure % evolution of system modes
 stairs(n1,p,'LineWidth',2,'Color','b');      %stairs函数绘制阶梯状图
 %stem(n1,p,'fill','LineWidth',2,'Color','b')  %stem函数绘制火柴梗图
 %stem(n1,q,'fill','LineWidth',1.5,'Color','k')%%黑色
@@ -132,20 +132,20 @@ xlabel(latexStr1,'interpreter','latex','FontSize',14)
 latexStr2 = ['$\delta_k$ '];                 % LaTeX语法，因为有些东西不用latex写不出来
 ylabel(latexStr2,'interpreter','latex','FontSize',14)
 
-figure
+figure  % controller modes
 stairs(n1,q,'LineWidth',2,'Color','b');      %stairs函数绘制阶梯状图
 %stem(n1,p,'fill','LineWidth',2,'Color','b')  %stem函数绘制火柴梗图
 %stem(n1,q,'fill','LineWidth',1.5,'Color','k')%%黑色
 axis([0 finaltime,0.5 3.5])
 latexStr1 = ['$k$ '];
 xlabel(latexStr1,'interpreter','latex','FontSize',14) 
-latexStr2 = ['$\eta_k$ '];                 % LaTeX语法，因为有些东西不用latex写不出来
+latexStr2 = ['$\eta_k$ '];                 
 ylabel(latexStr2,'interpreter','latex','FontSize',14)
 
 %% system
-%单连杆机械臂系统
+%single-link robot arm system
 M{1}=1; J{1}=1;    M{2}=5;J{2}=5;    M{3}=10;J{3}=10;    
-L=0.5;g=9.81;beta1=0.01/pi;T=0.1;     %w取0.65时，tmin为10^-4级，不满足；w=1时，tmin为-10^-5级，满足
+L=0.5;g=9.81;beta1=0.01/pi;T=0.1;     
 RR=2;        %区别QSR中的R
 
 A{1,1}=[1 T;-T*g*L 1-T*RR/(J{1})];  A{2,1}=[1 T;-T*g*L 1-T*RR/(J{2})];  A{3,1}=[1 T;-T*g*L 1-T*RR/(J{3})];  
@@ -166,17 +166,10 @@ E{1,2}=[1 0]; E{2,2}=[1 0]; E{3,2}=[1 0];
 F{1,1}=[1]; F{2,1}=[1]; F{3,1}=[1]; 
 F{1,2}=[1]; F{2,2}=[1]; F{3,2}=[1]; 
 
-
-%l2-l-infinity
-% F{1,1}=[0]; F{1,2}=[0]; F{1,3}=[0];  
-% F{2,1}=[0]; F{2,2}=[0]; F{2,3}=[0]; 
-
-%% 控制器增益
+%% control gains
 K{1,1}=-0.8644;  K{2,1}=-0.7739;  K{3,1}=-0.7278;  % dissipativity
 K{1,2}=-1.7148;  K{2,2}=-1.6087;  K{3,2}=-1.5537;
 
-
-% K{1}=-2.2727;  K{2}=-2.0759;  K{3}=-1.9698;  %l2-l-infinity
 %% uncertainty delta_K=kesi1_vj*kesi2_vj(k)*kesi3_vj
 kesi1{1,1}=0.02;  kesi1{2,1}=0.02;  kesi1{3,1}=0.02;
 kesi1{1,2}=-0.02; kesi1{2,2}=-0.02; kesi1{3,2}=-0.02;
@@ -184,7 +177,7 @@ kesi1{1,2}=-0.02; kesi1{2,2}=-0.02; kesi1{3,2}=-0.02;
 kesi3{1,1}=[0.02];  kesi3{2,1}=[0.02];  kesi3{3,1}=[0.02];
 kesi3{1,2}=[-0.01]; kesi3{2,2}=[-0.01]; kesi3{3,2}=[-0.01];
 
-%% 初值
+%% initial state
 x0=[0.5*pi;-0.1*pi];   %0时刻的初值
 x(:,1)=x0;   %矩阵x中第一列元素是x0
 x1(:,1)=x0;
@@ -228,7 +221,7 @@ for count=1:finaltime+1
    EE=h_1*E{s,1}+h_2*E{s,2};
    FF=h_1*F{s,1}+h_2*F{s,2}; 
    
-   %开环系统
+   %open-loop system
    AA1=h_11*A{s,1}+h_22*A{s,2}; 
    DD1=h_11*D{s,1}+h_22*D{s,2};
    CC1=h_11*C{s,1}+h_22*C{s,2};
@@ -242,7 +235,7 @@ for count=1:finaltime+1
    Kh_{1}=h_1*(K{1,1}+kesi1{1,1}*kesi2_{1,1}*kesi3{1,1})+h_2*(K{1,2}+kesi1{1,2}*kesi2_{1,2}*kesi3{1,2});
    Kh_{2}=h_1*(K{2,1}+kesi1{2,1}*kesi2_{2,1}*kesi3{2,1})+h_2*(K{2,2}+kesi1{2,2}*kesi2_{2,2}*kesi3{2,2});
    Kh_{3}=h_1*(K{3,1}+kesi1{3,1}*kesi2_{3,1}*kesi3{3,1})+h_2*(K{3,2}+kesi1{3,2}*kesi2_{3,2}*kesi3{3,2});
-  %没有控制器
+  %without controller
     if count>=1 & count<=25
         w=0.5*exp(0.1*count)*sin(count);
         x1(:,count+1)=AA1*x1(:,count)+DD1*w;
@@ -256,7 +249,7 @@ for count=1:finaltime+1
         z1(:,count)=EE1*x1(:,count)+FF1*w;
     end  
  
-%引入反馈控制器
+%introduce controller
     if count>=1 & count<=25
        w=0.5*exp(0.1*count)*sin(count);
        
@@ -279,33 +272,31 @@ for count=1:finaltime+1
    end
         
 end
-figure    %开环系统的状态响应曲线 
-%stairs(n2,q,'LineWidth',2,'Color','k');
+figure    %state response of open-loop system
 plot([0:1:finaltime+1],x1,'LineWidth',2);
 axis([0 finaltime,-4 4])
 latexStr1 = ['$k$ '];
 xlabel(latexStr1,'interpreter','latex','FontSize',14) 
 latexStr2 = ['$State~trajectories$ '];
 ylabel(latexStr2,'interpreter','latex','FontSize',14) 
-latexStr1 = ['$x_{1}(k)$'];                 % LaTeX语法，因为有些东西不用latex写不出来
+latexStr1 = ['$x_{1}(k)$'];                 
 latexStr2 = ['$x_{2}(k)$'];
 lgh=legend(latexStr1,latexStr2);  %加注释
 set(lgh,'interpreter','latex','FontSize',16)    
 
-figure           %闭环系统的状态响应曲线                            
+figure     %state response of closed-loop system                            
 plot([0:1:finaltime+1],x,'LineWidth',2);
 axis([0 finaltime,-2 2])
 latexStr1 = ['$k$ '];
 xlabel(latexStr1,'interpreter','latex','FontSize',14) 
 latexStr2 = ['$State~trajectories$ '];
 ylabel(latexStr2,'interpreter','latex','FontSize',14)
-%ylabel('State trajectories')
 latexStr1 = ['$x_{1}(k)$'];                 % LaTeX语法，因为有些东西不用latex写不出来
 latexStr2 = ['$x_{2}(k)$'];
 lgh=legend(latexStr1,latexStr2);  %加注释
-set(lgh,'interpreter','latex','FontSize',16)              %就是把字体改成latex格式figure
+set(lgh,'interpreter','latex','FontSize',16)              
 
-figure                                       
+figure    %control input                                 
 plot([0:1:finaltime],u,'LineWidth',2);
 axis([0 finaltime,-4 2])
 latexStr1 = ['$k$ '];
@@ -314,7 +305,7 @@ latexStr2 = ['$u(k)$ '];                 % LaTeX语法，因为有些东西不�
 ylabel(latexStr2,'interpreter','latex','FontSize',14)
 
 
-figure
+figure   %output and its prediction 
 plot([0:1:finaltime],y,'LineWidth',2);
 hold on
 plot([0:1:finaltime+1],y_hat,'LineWidth',2);
@@ -326,6 +317,3 @@ latexStr1 = ['$y(k)$'];                 % LaTeX语法，因为有些东西不用
 latexStr2 = ['$\hat{y}(k)$'];
 lgh=legend(latexStr1,latexStr2);  %加注释
 set(lgh,'interpreter','latex','FontSize',16)    
-
-
-
