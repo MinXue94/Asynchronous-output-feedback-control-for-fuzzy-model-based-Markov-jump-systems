@@ -13,7 +13,7 @@ For running this project you must include all the folder in the Matlab path. The
 ``` 
 new_lmi.m 
 ```
-Then, you can plot the figures of system response
+Then, you can plot the figures of the closed-loop system state responses under the control input.
 ```
 dissipativity_fig.m
 ```
