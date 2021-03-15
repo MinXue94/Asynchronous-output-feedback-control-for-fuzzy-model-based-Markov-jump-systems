@@ -124,8 +124,6 @@ q=[1 q];
 n1=0:finaltime;
 figure % evolution of system modes
 stairs(n1,p,'LineWidth',2,'Color','b');      %stairs函数绘制阶梯状图
-%stem(n1,p,'fill','LineWidth',2,'Color','b')  %stem函数绘制火柴梗图
-%stem(n1,q,'fill','LineWidth',1.5,'Color','k')%%黑色
 axis([0 finaltime,0.5 3.5])
 latexStr1 = ['$k$ '];
 xlabel(latexStr1,'interpreter','latex','FontSize',14) 
@@ -134,8 +132,6 @@ ylabel(latexStr2,'interpreter','latex','FontSize',14)
 
 figure  % controller modes
 stairs(n1,q,'LineWidth',2,'Color','b');      %stairs函数绘制阶梯状图
-%stem(n1,p,'fill','LineWidth',2,'Color','b')  %stem函数绘制火柴梗图
-%stem(n1,q,'fill','LineWidth',1.5,'Color','k')%%黑色
 axis([0 finaltime,0.5 3.5])
 latexStr1 = ['$k$ '];
 xlabel(latexStr1,'interpreter','latex','FontSize',14) 
@@ -191,10 +187,9 @@ for count=1:finaltime+1
     
     alpha1=[1 0]; prob = [0.8 0.2];   %prob 
     Alpha=randsrc(finaltime+1,1,[alpha1; prob]);   
-    %randsrc(m,n,[alphabet;prob])参数m&n得到mxn的矩阵,alphabet是矩阵中元素可能取值的集合,prob是与alphabet同维度的概率向量，分别对应着alphabet中的每个元素可能出现的概率，其元素之和为1。
     beta=Alpha(count);  %beta(k)表示丢包的变量
     
-    alpha=0.9;  %smoothing parameter
+    alpha=0.5;  %smoothing parameter
     
     x_1=[1 0]*x(:,count);     %x(:,count)表示第count列
     x_11=[1 0]*x1(:,count);  
@@ -212,7 +207,7 @@ for count=1:finaltime+1
             h_2=1-h_1;
             h_22=1-h_11;
    
-            %closed-loop system
+   %closed-loop system
    AA=h_1*A{s,1}+h_2*A{s,2}; 
    BB=h_1*B{s,1}+h_2*B{s,2};
    DD=h_1*D{s,1}+h_2*D{s,2};  
