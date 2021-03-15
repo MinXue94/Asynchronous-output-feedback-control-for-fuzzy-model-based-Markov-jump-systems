@@ -13,7 +13,9 @@ For running this project you must include all the folder in the Matlab path. The
 ``` 
 new_lmi.m 
 ```
-Then, you can plot the figures of the closed-loop system state responses under the control input.
+Then, you can obtain the control gain matrices and the optimal dissipative value.
+After that, to verify the effectiveness of the designed controller, you can plot the figure of the closed-loop system state responses under the control input. Run
 ```
 dissipativity_fig.m
 ```
+
