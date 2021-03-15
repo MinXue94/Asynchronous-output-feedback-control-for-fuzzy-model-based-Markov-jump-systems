@@ -1,15 +1,13 @@
-%Lyapunov function V=x*P_sh*x
-%dissipativity 
 clear
 clc
-%fuzzy Markov jump systemµÄdissipativity-based nonfragileÊä³ö·´À¡¿ØÖÆ 
+%fuzzy Markov jump system dissipativity-based nonfragile output feedback control
 tic
 format long
 %% system
-%µ¥Á¬¸Ë»úĞµ±ÛÏµÍ³
+%single-link robot arm system
 M{1}=1; J{1}=1;    M{2}=5;J{2}=5;    M{3}=10;J{3}=10;   
 L=0.5;g=9.81;beta1=0.01/pi;T=0.1;     
-RR=2;        %Çø±ğQSRÖĞµÄR
+RR=2;        %åŒºåˆ«QSRä¸­çš„R
 
 A{1,1}=[1 T;-T*g*L 1-T*RR/(J{1})];  A{2,1}=[1 T;-T*g*L 1-T*RR/(J{2})];  A{3,1}=[1 T;-T*g*L 1-T*RR/(J{3})];  
 A{1,2}=[1 T;-beta1*T*g*L 1-T*RR/(J{1})];  A{2,2}=[1 T;-beta1*T*g*L 1-T*RR/(J{2})]; A{3,2}=[1 T;-beta1*T*g*L 1-T*RR/(J{3})]; 
@@ -37,31 +35,31 @@ kesi1{1}=0.02;  kesi1{2}=0.02;  kesi1{3}=0.02;
 % kesi1{1}=0;  kesi1{2}=0;  kesi1{3}=0;
 % kesi3{1}=0;  kesi3{2}=0;  kesi3{3}=0;
 
-%% ×ªÒÆ¾ØÕó Ìõ¼ş¸ÅÂÊ¾ØÕó
+% transition probability matrix  
 rule=2;
 S1=3;
 S2=3;
 Pi=[0.3 0.2 0.5;0.4 0.2 0.4;0.55 0.15 0.3];
-% Phi=[0.3 0.2 0.5;0.1 0.2 0.7;0.3 0.2 0.5];
+% conditional probability matrix  
 Phi=[0.5 0.2 0.3;0.1 0.3 0.6;0.4 0.1 0.5];
 
-%% ºÄÉ¢µÄ²ÎÊı
+%% dissipative parameters
  Q=-1;    S=1;    R=1;  
 
 Q1_=-chol(-Q,'lower');    % -Q=Q_'Q_
 %% data dropouts
 beta=0.7;
 beta_=sqrt(beta*(1-beta));
-%% ±êÁ¿
+%% æ ‡é‡
 aib1=0.1;
-aib2=0.1;    %¸¨ÖúÇó½âLMIs
-alpha=0.8;  %Æ½»¬ÏµÊı
-%% ±äÁ¿
+aib2=0.1;    %è¾…åŠ©æ±‚è§£LMIs
+alpha=0.8;  %å¹³æ»‘ç³»æ•°
+%% define variables
 setlmis([]); 
 for i=1:rule
     for s=1:S1 
         for n=1:S2
-            P1(s,i)=lmivar(1,[2,1]);       %2x2¶Ô³Æ¾ØÕó
+            P1(s,i)=lmivar(1,[2,1]);       %2x2å¯¹ç§°çŸ©é˜µ
             P2(s,i)=lmivar(2,[2,1]);
             P3(s,i)=lmivar(1,[1,0]);
             
@@ -74,16 +72,16 @@ end
 
 
 for n=1:S2
-    Y(n)=lmivar(1,[1,0]);         %1x1µÄ¾ØÕó
+    Y(n)=lmivar(1,[1,0]);         %1x1çš„çŸ©é˜µ
     X(n)=lmivar(1,[1,0]);
     
 end
 
-gamma=lmivar(1,[1,0]);           %±êÁ¿   %ºÄÉ¢Ö¸±ê
-%%  ±£Ö¤P>0  Q>0
+gamma=lmivar(1,[1,0]);           %æ ‡é‡   %è€—æ•£æŒ‡æ ‡
+%%  ensure P>0  Q>0
 for i=1:rule
      for s=1:S1
-     FF(s,i)=newlmi;         %ÓÃº¯ÊınewlmiÈ·¶¨ÏßĞÔ²»µÈÊ½µÄÃû³ÆÎªFF(m,i)
+     FF(s,i)=newlmi;         %ç”¨å‡½æ•°newlmiç¡®å®šçº¿æ€§ä¸ç­‰å¼çš„åç§°ä¸ºFF(m,i)
      lmiterm([FF(s,i) 1 1 P1(s,i)],-1,1);   
      lmiterm([FF(s,i) 1 2 P2(s,i)],-1,1); 
      lmiterm([FF(s,i) 2 2 P3(s,i)],-1,1); 
@@ -104,7 +102,7 @@ end
 
 FEA=newlmi;
 lmiterm([FEA 1 1 gamma],-1,1);
-%% ¶¨Àí2ÖĞµÄ£¨28£©
+%% Theorem 2ï¼ˆ30ï¼‰
 for i=1:rule
     for s=1:S1   
         LMI{s,i}=newlmi;
@@ -125,7 +123,7 @@ for i=1:rule
         
     end
 end
-% ¶¨Àí2ÖĞµÄ(29)Ê½ ii
+% Theorem 2 (31) ii
 for f=1:rule
     for i=1:rule
         for s=1:S1 
@@ -291,7 +289,7 @@ for f=1:rule
         end
     end
 end
-% ¶¨Àí2ÖĞµÄ(30)Ê½ j<i
+% Theorem 2 formula (32)
 for f=1:rule
     for j=1:(rule-1)
         for i=(j+1):rule 
@@ -621,20 +619,21 @@ end
 
 %% solve LMIs
 lmisys=getlmis;
-y=decnbr(lmisys);              %µÃµ½lmisÏµÍ³±äÁ¿¸öÊı
+y=decnbr(lmisys);              %å¾—åˆ°lmisç³»ç»Ÿå˜é‡ä¸ªæ•° the number of variables
 c=[zeros(y-1,1);-1]; 
-options=[1e-5,1000,0,0,0];     % ¾«¶ÈÒªÇóÎª1e-5£¬×î´óµü´ú´ÎÊıÎª1000
+options=[1e-5,1000,0,0,0];     % ç²¾åº¦è¦æ±‚ä¸º1e-5ï¼Œæœ€å¤§è¿­ä»£æ¬¡æ•°ä¸º1000
 [a1,b1]=mincx(lmisys,c,options);
 gamma=dec2mat(lmisys,b1,gamma)
 
-for v=1:S2                                %¿ØÖÆÆ÷
+% control gain matrices  
+for v=1:S2                                
     
-           fprintf('K_%d%d  is',v)              % %d%dÁ½¸öÊä³öÖ®¼äÃ»ÓĞ¶ººÅ¼ä¸ô
+           fprintf('K_%d%d  is',v)              
           
-          dec2mat(lmisys,b1,X(v))^(-1)*(dec2mat(lmisys,b1,Y(v)))        %dec2mat£º¾ö²ß±äÁ¿×ª»¯Îª¾ØÕóĞÎÊ½ 
+          dec2mat(lmisys,b1,X(v))^(-1)*(dec2mat(lmisys,b1,Y(v)))        %dec2matï¼šå†³ç­–å˜é‡è½¬åŒ–ä¸ºçŸ©é˜µå½¢å¼ 
 end       
 
-toc      %¼ÆÊ±
+toc      %è®¡æ—¶
 
 
 
