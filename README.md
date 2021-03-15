@@ -8,3 +8,6 @@ We use an example of a single-link robot arm system. The system matrices, transi
 ### The asynchronous output feedback controller
 The designed controller has been built as an output feedback controller based on a hidden Markov model and a compensation scheme. 
 The control gain matrices are computed by solving the onvex optimization problem of Theorem 2. Meanwhile, the optimal dissipative value can be obtained.
+## Running the tests
+For running this project you must include all the folder in the Matlab path. Then, just run
+```new_lmi.m
